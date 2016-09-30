@@ -1,0 +1,42 @@
+<div class="jumbotron">
+  <h1>Welcome to the Forbidden Forest</h1>
+</div>
+<div class="row">
+  <div class="col-xs-6">
+    <form class="form-group" action="/endangered" method="post">
+      <label for="endangered">Enter an Endangered Here</label>
+      <input class="form-control" type="text" name="endangered">
+      <h3>Choose Age</h3>
+      <select name="age">
+        <option value="1">New born</option>
+        <option value="2">Young</option>
+        <option value="3">Adult</option>
+      </select>
+      <h3>Choose Health</h3>
+      <select name="health">
+        <option value="1">Ill</option>
+        <option value="2">Okay</option>
+        <option value="3">Healthy</option>
+      </select>
+      <button type="submit" class="btn btn-primary" name="button">Add</button>
+    </form>
+
+    <h3>Enter a Animal of Less Concern</h3>
+    <form class="form-group" action="/animal" method="post">
+      <label for="animal">Enter Safe Animal Here</label>
+      <input class="form-control" type="text" name="animal">
+      <button type="submit" class="btn btn-primary" name="button">Add</button>
+    </form>
+  </div>
+  <div class="col-xs-6">
+    <h3>All Endangered Animals</h3>
+    #foreach($endangered in $endageredAnimals)
+      <li><a href="/endangered/$endangered.getId()">$endangered.getId()</a></li>
+    #end
+
+    <h3>Rest of the Animals</h3>
+    #foreach($animal in $animals)
+      <li><a href="/animal/$animal.getId()">$animal.getId()</a></li>
+    #end
+  </div>
+</div>

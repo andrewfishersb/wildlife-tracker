@@ -21,6 +21,7 @@ public class EndangeredAnimal extends Animal implements DatabaseManagement{
   }
 
 
+
   public String getHealth(){
     return this.health;
   }

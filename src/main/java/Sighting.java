@@ -4,6 +4,8 @@ import java.util.Date;
 import java.text.DateFormat;
 import java.util.List;
 
+
+//maybe search for ranger
 public class Sighting implements DatabaseManagement{
   private int id;
   private int animalId;
@@ -18,13 +20,13 @@ public class Sighting implements DatabaseManagement{
     this.timeSpotted = new Timestamp(new Date().getTime());
   }
 
-
+  public Timestamp getTime(){
+    return timeSpotted;
+  }
 
   public String getTimeSpotted(){
     return DateFormat.getDateTimeInstance().format(timeSpotted);
   }
-  //all equal find save delete
-//shoudlnt have to throw a map failure here
 
 
   public static Sighting find(int id){
@@ -47,7 +49,7 @@ public class Sighting implements DatabaseManagement{
 
   public static List<Sighting> all(){
     try(Connection con = DB.sql2o.open()){
-      String sql = "SELECT * FROM sightings";
+      String sql = "SELECT * FROM sightings ORDER BY timespotted DESC";
      return con.createQuery(sql).executeAndFetch(Sighting.class);
     }
   }

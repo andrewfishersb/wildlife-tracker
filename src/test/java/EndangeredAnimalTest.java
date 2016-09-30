@@ -64,4 +64,6 @@ public class EndangeredAnimalTest{
     EndangeredAnimal testEndangeredAnimal = new EndangeredAnimal("Tiger",EndangeredAnimal.GOOD_HEALTH_LEVEL,EndangeredAnimal.YOUNG_ANIMAL);
     assertEquals("Endangered",testEndangeredAnimal.getType());
   }
+
+
 }

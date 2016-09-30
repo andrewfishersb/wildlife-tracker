@@ -59,4 +59,16 @@ public class AnimalTest{
     assertEquals(0,Animal.all().size());
   }
 
+  @Test
+  public void getSightings_RetrieveSightingsAssociatedWithCurrentAnimalOrderedByTimestamp(){
+    Animal testAnimal = new Animal("Elk");
+    testAnimal.save();
+    Sighting firstSighting = new Sighting("Ranger McFriendly","South Park",testAnimal.getId());
+    firstSighting.save();
+    Sighting secondSighting = new Sighting("Smokey the Bear","Smokey Mountains",testAnimal.getId());
+    secondSighting.save();
+    assertTrue(secondSighting.equals(testAnimal.getSightings().get(0)));
+  }
+
+
 }

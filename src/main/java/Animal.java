@@ -1,7 +1,7 @@
 import org.sql2o.*;
 import java.util.ArrayList;
 import java.util.List;
-//maybe add search and must add a getSightings
+
 public class Animal implements DatabaseManagement{
   protected int id;
   protected String name;
@@ -27,16 +27,13 @@ public class Animal implements DatabaseManagement{
     return type;
   }
 
-
-  @Override
-  public boolean equals(Object otherAnimal){
-    if(!(otherAnimal instanceof Animal)){
-      return false;
-    }else{
-      Animal newAnimal = (Animal) otherAnimal;
-      return this.getName().equals(newAnimal.getName());
+  public List<Sighting> getSightings(){
+    try(Connection con = DB.sql2o.open()){
+      String sql = "SELECT * FROM sightings WHERE animalid=:id ORDER BY timespotted DESC";
+      return con.createQuery(sql).addParameter("id",this.id).executeAndFetch(Sighting.class);
     }
   }
+
 
   @Override
   public void save(){
@@ -50,6 +47,8 @@ public class Animal implements DatabaseManagement{
   public void delete(){
     try(Connection con = DB.sql2o.open()){
       String sql = "DELETE FROM animals WHERE id =:id";
+      String sqlSightings = "DELETE FROM sightings WHERE animalid =:animalid";
+      con.createQuery(sqlSightings).addParameter("animalid",this.id).executeUpdate();
       con.createQuery(sql).addParameter("id",this.id).executeUpdate();
     }
   }
@@ -67,4 +66,15 @@ public class Animal implements DatabaseManagement{
      return con.createQuery(sql).throwOnMappingFailure(false).executeAndFetch(Animal.class);
     }
   }
+
+  @Override
+  public boolean equals(Object otherAnimal){
+    if(!(otherAnimal instanceof Animal)){
+      return false;
+    }else{
+      Animal newAnimal = (Animal) otherAnimal;
+      return this.getName().equals(newAnimal.getName());
+    }
+  }
+
 }
