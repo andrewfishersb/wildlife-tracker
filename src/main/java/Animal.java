@@ -5,9 +5,14 @@ import java.util.List;
 public class Animal implements DatabaseManagement{
   protected int id;
   protected String name;
+  protected String type;
+
+  public static final String DATABASE_TYPE_SAFE = "Least Concern";
+
 
   public Animal(String name){
     this.name = name;
+      type = DATABASE_TYPE_SAFE;
   }
 
   public String getName(){
@@ -18,6 +23,9 @@ public class Animal implements DatabaseManagement{
     return id;
   }
 
+  public String getType(){
+    return type;
+  }
 //all equal find save delete
 
   @Override

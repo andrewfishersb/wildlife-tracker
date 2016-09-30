@@ -1,4 +1,5 @@
 import org.sql2o.*;
+import java.util.List;
 
 public class EndangeredAnimal extends Animal implements DatabaseManagement{
 
@@ -9,9 +10,11 @@ public class EndangeredAnimal extends Animal implements DatabaseManagement{
   public static final String NEW_ANIMAL ="New born";
   public static final String YOUNG_ANIMAL ="Young";
   public static final String OLDER_ANIMAL ="Adult";
+  public static final String DATABASE_TYPE_ENDANGERED = "Endangered";
 
   public EndangeredAnimal(String name){
     super(name);
+    type = DATABASE_TYPE_ENDANGERED;
   }
 
   public String getName(){
@@ -22,5 +25,18 @@ public class EndangeredAnimal extends Animal implements DatabaseManagement{
     return id;
   }
 
-//all  find
+  public static List<EndangeredAnimal> allEndangeredAnimals(){
+    try(Connection con = DB.sql2o.open()){
+      String sql = "SELECT * FROM animals WHERE type = 'Endangered'";
+      return con.createQuery(sql).throwOnMappingFailure(false).executeAndFetch(EndangeredAnimal.class);
+    }
+  }
+
+  public static EndangeredAnimal findEndangeredAnimal(int id){
+    try(Connection con = DB.sql2o.open()){
+      String sql = "SELECT * FROM animals WHERE id = :id";
+      return con.createQuery(sql).addParameter("id",id).throwOnMappingFailure(false).executeAndFetchFirst(EndangeredAnimal.class);
+    }
+  }
+
 }
