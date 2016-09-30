@@ -1,4 +1,3 @@
-//all equal find save delete
 import org.junit.*;
 import static org.junit.Assert.*;
 import org.sql2o.*;
@@ -27,5 +26,37 @@ public class AnimalTest{
     assertTrue(Animal.all().get(1).equals(secondAnimal));
   }
 
+  @Test
+  public void equals_ChecksIfTwoAnimalsAreEqual_true(){
+    Animal firstAnimal = new Animal("Red Panda");
+    firstAnimal.save();
+    Animal secondAnimal = new Animal("Red Panda");
+    secondAnimal.save();
+    assertTrue(firstAnimal.equals(secondAnimal));
+  }
+
+  @Test
+  public void all_ReturnsAListOfAllAnimals_2(){
+    Animal firstAnimal = new Animal("Red Panda");
+    firstAnimal.save();
+    Animal secondAnimal = new Animal("Panda Bear");
+    secondAnimal.save();
+    assertEquals(2,Animal.all().size());
+  }
+
+  @Test
+  public void find_FindsAnAnimalById_true(){
+    Animal testAnimal = new Animal("Red Panda");
+    testAnimal.save();
+    assertTrue(Animal.find(testAnimal.getId()).equals(testAnimal));
+  }
+
+  @Test
+  public void delete_DeletesAnimal_true(){
+    Animal testAnimal = new Animal("Red Panda");
+    testAnimal.save();
+    testAnimal.delete();
+    assertEquals(0,Animal.all().size());
+  }
 
 }
