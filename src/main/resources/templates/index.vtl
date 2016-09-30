@@ -31,12 +31,12 @@
   <div class="col-xs-6">
     <h3>All Endangered Animals</h3>
     #foreach($endangered in $endageredAnimals)
-      <li><a href="/endangered/$endangered.getId()">$endangered.getId()</a></li>
+      <li><a href="/endangered/$endangered.getId()">$endangered.getName()</a></li>
     #end
 
     <h3>Rest of the Animals</h3>
     #foreach($animal in $animals)
-      <li><a href="/animal/$animal.getId()">$animal.getId()</a></li>
+      <li><a href="/animal/$animal.getId()">$animal.getName()</a></li>
     #end
   </div>
 </div>

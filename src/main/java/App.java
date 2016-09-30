@@ -24,30 +24,56 @@ public class App{
       post("/endangered", (request, response) -> {
         Map<String, Object> model = new HashMap<String, Object>();
         String species = request.queryParams("endangered");
-        Integer healthValue = request.queryParams("health")
-
+        Integer ageValue = Integer.parseInt(request.queryParams("age"));
+        Integer healthValue = Integer.parseInt(request.queryParams("health"));
+        String ageOutcome = "";
+        String healthOutcome = "";
+        if(ageValue==1){
+          ageOutcome = EndangeredAnimal.NEW_ANIMAL;
+        }else if(ageValue==2){
+          ageOutcome = EndangeredAnimal.YOUNG_ANIMAL;
+        }else{
+          ageOutcome = EndangeredAnimal.OLDER_ANIMAL;
+        }
+        if(healthValue==1){
+          healthOutcome = EndangeredAnimal.POOR_HEALTH_LEVEL;
+        }else if(healthValue==2){
+          healthOutcome = EndangeredAnimal.AVERAGE_HEALTH_LEVEL;
+        }else{
+          healthOutcome = EndangeredAnimal.GOOD_HEALTH_LEVEL;
+        }
+        EndangeredAnimal theAnimal = new EndangeredAnimal(species,healthOutcome,ageOutcome);
         try{
-          anEndangeredAnimal.save();
-        }catch (UnsupportedOperationException exception)
-      { }
-
-        String species
+          theAnimal.save();
+        }catch (UnsupportedOperationException exception){ }
+        model.put("animals",Animal.all());
+        model.put("endageredAnimals",EndangeredAnimal.all());
         model.put("template", "templates/index.vtl");
         return new ModelAndView(model, layout);
       }, new VelocityTemplateEngine());
 
-//form submit to first page
-      // post("/endangered", (request, response) -> {
+      post("/animal", (request, response) -> {
+        Map<String, Object> model = new HashMap<String, Object>();
+        Animal newAnimal = new Animal(request.queryParams("animal"));
+        try{
+          newAnimal.save();
+        }catch(UnsupportedOperationException exception){ }
+        model.put("animals",Animal.all());
+        model.put("endageredAnimals",EndangeredAnimal.all());
+        model.put("template", "templates/index.vtl");
+        return new ModelAndView(model, layout);
+      }, new VelocityTemplateEngine());
+
+      // get("/animal/:id", (request, response) -> {
       //   Map<String, Object> model = new HashMap<String, Object>();
-      //   // try{
-      //   EndangeredAnimal
-      //   // }catch
-      //
-      //   model.put("template", "templates/endangeredform.vtl");
+      //   model.put("template", "templates/index.vtl");
       //   return new ModelAndView(model, layout);
       // }, new VelocityTemplateEngine());
 
-
+      // post("/", (request, response) -> {
+      //   Map<String, Object> model = new HashMap<String, Object>();
+      //   return new ModelAndView(model, layout);
+      // }, new VelocityTemplateEngine());
 
 
 
