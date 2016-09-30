@@ -2,8 +2,9 @@ import org.sql2o.*;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.text.DateFormat;
+import java.util.List;
 
-public class Sighting{
+public class Sighting implements DatabaseManagement{
   private int id;
   private int animalId;
   private String rangerName;
@@ -23,13 +24,8 @@ public class Sighting{
     return DateFormat.getDateTimeInstance().format(timeSpotted);
   }
   //all equal find save delete
+//shoudlnt have to throw a map failure here
 
-  public static List<Sighting> all(){
-    try(Connection con = DB.sql2o.open()){
-      String sql="SELECT * FROM sightings";
-      return con.createQuery(sql).executeAndFetch(Sighting.class);
-    }
-  }
 
   public static Sighting find(int id){
     try(Connection con = DB.sql2o.open()){
@@ -38,11 +34,21 @@ public class Sighting{
     }
   }
 
+
+
   @Override
   public void save(){
     try(Connection con = DB.sql2o.open()){
-      String sql="INSERT INTO sightings (rangername,location,animal_id) VALUES (:rangername, :location, :animal_id)";
-      this.id = (int) con.createQuery(sql,true).addParameter("rangername",this.rangerName).addParameter("location",this.location).addParameter("animal_id",this.animalId).executeUpdate().getKey();
+      String sql ="INSERT INTO sightings (rangername,location,timespotted,animalid) VALUES (:rangername,:location,:timespotted,:animalid)";
+      this.id = (int) con.createQuery(sql,true).addParameter("rangername",this.rangerName).addParameter("location",this.location).addParameter("timespotted",this.timeSpotted).addParameter("animalid",this.animalId).executeUpdate().getKey();
+    }
+  }
+
+
+  public static List<Sighting> all(){
+    try(Connection con = DB.sql2o.open()){
+      String sql = "SELECT * FROM sightings";
+     return con.createQuery(sql).executeAndFetch(Sighting.class);
     }
   }
 
@@ -72,7 +78,7 @@ public class Sighting{
 
   @Override
   public boolean equals(Object otherSighting){
-    if(!(otherSighting instanceof)){
+    if(!(otherSighting instanceof Sighting)){
       return false;
     }else{
       Sighting newSighting = (Sighting) otherSighting;

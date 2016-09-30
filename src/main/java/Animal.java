@@ -1,7 +1,7 @@
 import org.sql2o.*;
 import java.util.ArrayList;
 import java.util.List;
-
+//maybe add search and must add a getSightings
 public class Animal implements DatabaseManagement{
   protected int id;
   protected String name;
