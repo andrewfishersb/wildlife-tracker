@@ -1,4 +1,3 @@
-//all equal find save delete
 import org.junit.*;
 import static org.junit.Assert.*;
 import org.sql2o.*;
@@ -10,7 +9,7 @@ public class EndangeredAnimalTest{
   @Rule
   public DatabaseRule database = new DatabaseRule();
 
-//edit this
+
   @Test
   public void endangeredAnimal_instaniatesCorrectly_true(){
     EndangeredAnimal testEndangeredAnimal = new EndangeredAnimal("Rhinoceros",EndangeredAnimal.GOOD_HEALTH_LEVEL,EndangeredAnimal.YOUNG_ANIMAL);
