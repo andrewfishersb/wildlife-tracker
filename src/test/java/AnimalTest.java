@@ -10,11 +10,22 @@ import java.util.ArrayList;
 public class AnimalTest{
 
   @Rule
-  DatabaseRule database = new DatabaseRule();
+  public DatabaseRule database = new DatabaseRule();
 
   @Test
   public void animal_instaniatesCorrectly_true(){
     Animal testAnimal = new Animal("Red Panda");
     assertTrue(testAnimal instanceof Animal);
   }
+
+  @Test
+  public void save_SavesTheAnimal(){
+    Animal firstAnimal = new Animal("Red Panda");
+    firstAnimal.save();
+    Animal secondAnimal = new Animal("Panda Bear");
+    secondAnimal.save();
+    assertTrue(Animal.all().get(1).equals(secondAnimal));
+  }
+
+
 }

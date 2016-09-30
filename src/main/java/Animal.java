@@ -1,8 +1,10 @@
 import org.sql2o.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Animal implements DatabaseManagement{
-  private int id;
-  private String name;
+  protected int id;
+  protected String name;
 
   public Animal(String name){
     this.name = name;
@@ -19,7 +21,7 @@ public class Animal implements DatabaseManagement{
 //all equal find save delete
 
   @Override
-  public boolean equal(Object otherAnimal){
+  public boolean equals(Object otherAnimal){
     if(!(otherAnimal instanceof Animal)){
       return false;
     }else{
@@ -31,8 +33,8 @@ public class Animal implements DatabaseManagement{
   @Override
   public void save(){
     try(Connection con = DB.sql2o.open()){
-      String sql = "INSERT INTO animals (name, id) VALUES (:name,:id)";
-      this.id = (int) con.createQuery(sql,true).addParameter("name",this.name).addParameter("id",this.id).executeUpdate().getKey();
+      String sql = "INSERT INTO animals (name) VALUES (:name)";
+      this.id = (int) con.createQuery(sql,true).addParameter("name",this.name).executeUpdate().getKey();
     }
   }
 
@@ -44,17 +46,17 @@ public class Animal implements DatabaseManagement{
     }
   }
 
-  public Animal find(int id){
+  public static Animal find(int id){
     try(Connection con = DB.sql2o.open()){
       String sql = "SELECT * FROM animals WHERE id=:id";
       return con.createQuery(sql).addParameter("id",id).executeAndFetchFirst(Animal.class);
     }
   }
 
-  public List<Animal> all(){
+  public static List<Animal> all(){
     try(Connection con = DB.sql2o.open()){
       String sql = "SELECT * FROM animals";
-     return con.createQuery(sql).executeAndFetch(Animal.class);
+     return con.createQuery(sql).throwOnMappingFailure(false).executeAndFetch(Animal.class);
     }
   }
 }
