@@ -12,7 +12,7 @@ public class Animal implements DatabaseManagement{
 
   public Animal(String name){
     this.name = name;
-      type = DATABASE_TYPE_SAFE;
+    this.type = DATABASE_TYPE_SAFE;
   }
 
   public String getName(){
@@ -26,7 +26,7 @@ public class Animal implements DatabaseManagement{
   public String getType(){
     return type;
   }
-//all equal find save delete
+
 
   @Override
   public boolean equals(Object otherAnimal){
@@ -41,8 +41,8 @@ public class Animal implements DatabaseManagement{
   @Override
   public void save(){
     try(Connection con = DB.sql2o.open()){
-      String sql = "INSERT INTO animals (name) VALUES (:name)";
-      this.id = (int) con.createQuery(sql,true).addParameter("name",this.name).executeUpdate().getKey();
+      String sql = "INSERT INTO animals (name,type) VALUES (:name,:type)";
+      this.id = (int) con.createQuery(sql,true).addParameter("name",this.name).addParameter("type",type).executeUpdate().getKey();
     }
   }
 
