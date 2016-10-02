@@ -16,7 +16,7 @@ public class App{
       get("/", (request, response) -> {
         Map<String, Object> model = new HashMap<String, Object>();
         model.put("animals",Animal.all());
-        model.put("endageredAnimals",EndangeredAnimal.all());
+        model.put("endageredAnimals",EndangeredAnimal.allEndangeredAnimals());
         model.put("template", "templates/index.vtl");
         return new ModelAndView(model, layout);
       }, new VelocityTemplateEngine());
@@ -47,7 +47,7 @@ public class App{
           theAnimal.save();
         }catch (UnsupportedOperationException exception){ }
         model.put("animals",Animal.all());
-        model.put("endageredAnimals",EndangeredAnimal.all());
+        model.put("endageredAnimals",EndangeredAnimal.allEndangeredAnimals());
         model.put("template", "templates/index.vtl");
         return new ModelAndView(model, layout);
       }, new VelocityTemplateEngine());
@@ -64,6 +64,7 @@ public class App{
         return new ModelAndView(model, layout);
       }, new VelocityTemplateEngine());
 
+//Safe Animal form
       // get("/animal/:id", (request, response) -> {
       //   Map<String, Object> model = new HashMap<String, Object>();
       //   model.put("template", "templates/index.vtl");
