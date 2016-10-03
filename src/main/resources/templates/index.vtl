@@ -3,27 +3,28 @@
 </div>
 <div class="row">
   <div class="col-xs-6">
+    <h3>Endangered:</h3>
+
     <form class="form-group" action="/endangered" method="post">
       <label for="endangered">Enter an Endangered Here</label>
       <input class="form-control" type="text" name="endangered">
-      <h3>Choose Age</h3>
-      <select name="age">
+      <h4>Choose Age</h4>
+      <select name="age" class="form-control">
         <option value="1">New born</option>
         <option value="2">Young</option>
         <option value="3">Adult</option>
       </select>
-      <h3>Choose Health</h3>
-      <select name="health">
-        <option value="1">Ill</option>
+      <h4>Choose Health</h4>
+      <select name="health" class="form-control">
+        <option value="1">Sick</option>
         <option value="2">Okay</option>
         <option value="3">Healthy</option>
       </select>
       <button type="submit" class="btn btn-primary" name="button">Add</button>
     </form>
-
-    <h3>Enter a Animal of Less Concern</h3>
+    <h3>Or Safe:</h3>
     <form class="form-group" action="/animal" method="post">
-      <label for="animal">Enter Safe Animal Here</label>
+      <label for="animal">Enter a Animal of Less Concern</label>
       <input class="form-control" type="text" name="animal">
       <button type="submit" class="btn btn-primary" name="button">Add</button>
     </form>

@@ -7,7 +7,7 @@ public class EndangeredAnimal extends Animal implements DatabaseManagement{
 
   public static final String GOOD_HEALTH_LEVEL ="Healthy";
   public static final String AVERAGE_HEALTH_LEVEL ="Okay";
-  public static final String POOR_HEALTH_LEVEL ="Ill";
+  public static final String POOR_HEALTH_LEVEL ="Sick";
   public static final String NEW_ANIMAL ="New born";
   public static final String YOUNG_ANIMAL ="Young";
   public static final String OLDER_ANIMAL ="Adult";

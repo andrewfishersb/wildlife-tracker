@@ -1,1 +1,45 @@
-<h1>Enter a Sighting for an Animal of less concern</h1>
+<div class="navbar navbar-inverse">
+  <ul class="nav nav-pills">
+    <li role="presentation"><a href="/">Homepage</a></li>
+  </ul>
+
+</div>
+
+<div class="page-header">
+  <h1>Enter a Sighting for the $animal.getName() species</h1>
+</div>
+
+<div class="row">
+  <div class="col-xs-4">
+    <h3>Record More Sighting Information</h3>
+    <form class="form-group" action="/animal/$animal.getId()/animal-sightings" method="post">
+      <label for="name">Enter Your Name</label>
+      <input type="text" class="form-control"name="name">
+      <label for="location">Location of sighting</label>
+      <input type="text" name="location" class="form-control">
+      <button type="submit" name="button" class="btn btn-primary">Submit Sighting</button>
+    </form>
+  </div>
+
+  <div class="col-xs-8">
+    <h3>Recorded Sightings</h3>
+    #foreach($sighting in $sightings)
+    <div class="row">
+
+      <div class="col-xs-10">
+        <span>$sighting.getTimeSpotted() Name: $sighting.getRangerName()
+          Location: $sighting.getLocation()</span>
+      </div>
+      <div class="col-xs-2">
+        <form class="" action="/animal/$animal.getId()/$sighting.getId()/sighting-deleted" method="post">
+          <button type="submit" class="btn btn-danger" name="button">-</button>
+        </form>
+      </div>
+    </div>
+    #end
+  </div>
+</div>
+
+<form class="" action="/animal/$animal.getId()/deleted" method="post">
+  <button type="submit" class="btn btn-danger" name="button">Delete Whole Entry</button>
+</form>

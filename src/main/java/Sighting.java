@@ -5,12 +5,11 @@ import java.text.DateFormat;
 import java.util.List;
 
 
-//maybe search for ranger
 public class Sighting implements DatabaseManagement{
   private int id;
   private int animalId;
   private String rangerName;
-  private String location; //maybe constance or an array or something add
+  private String location;
   private Timestamp timeSpotted;
 
   public Sighting(String rangerName, String location, int animalId){

@@ -30,7 +30,7 @@ public class Animal implements DatabaseManagement{
   public List<Sighting> getSightings(){
     try(Connection con = DB.sql2o.open()){
       String sql = "SELECT * FROM sightings WHERE animalid=:id ORDER BY timespotted DESC";
-      return con.createQuery(sql).addParameter("id",this.id).executeAndFetch(Sighting.class);
+      return con.createQuery(sql).addParameter("id",this.id).throwOnMappingFailure(false).executeAndFetch(Sighting.class);
     }
   }
 
@@ -56,7 +56,7 @@ public class Animal implements DatabaseManagement{
   public static Animal find(int id){
     try(Connection con = DB.sql2o.open()){
       String sql = "SELECT * FROM animals WHERE id=:id";
-      return con.createQuery(sql).addParameter("id",id).executeAndFetchFirst(Animal.class);
+      return con.createQuery(sql).addParameter("id",id).throwOnMappingFailure(false).executeAndFetchFirst(Animal.class);
     }
   }
 
