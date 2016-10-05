@@ -119,5 +119,25 @@ public class App{
         response.redirect("/");
         return new ModelAndView(model, layout);
       }, new VelocityTemplateEngine());
+
+//deletes endangered sighting
+      post("/endangered/:id/deleted-sighting/:sightingid", (request, response) -> {
+        Map<String, Object> model = new HashMap<String, Object>();
+        int animalId = Integer.parseInt(request.params("id"));
+        int sightingId = Integer.parseInt(request.params("sightingid"));
+        Sighting.find(sightingId).delete();
+        response.redirect("/endangered/"+animalId);
+        return new ModelAndView(model, layout);
+      }, new VelocityTemplateEngine());
+
+      //deletes animal sighting
+      post("/animal/:id/deleted-sighting/:sightingid", (request, response) -> {
+        Map<String, Object> model = new HashMap<String, Object>();
+        int animalId = Integer.parseInt(request.params("id"));
+        int sightingId = Integer.parseInt(request.params("sightingid"));
+        Sighting.find(sightingId).delete();
+        response.redirect("/animal/"+animalId);
+        return new ModelAndView(model, layout);
+      }, new VelocityTemplateEngine());
     }
 }

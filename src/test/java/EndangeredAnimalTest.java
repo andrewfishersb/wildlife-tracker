@@ -23,7 +23,7 @@ public class EndangeredAnimalTest{
     firstEndangeredAnimal.save();
     EndangeredAnimal secondEndangeredAnimal = new EndangeredAnimal("Tiger",EndangeredAnimal.GOOD_HEALTH_LEVEL,EndangeredAnimal.YOUNG_ANIMAL);
     secondEndangeredAnimal.save();
-    assertTrue(EndangeredAnimal.all().get(1).equals(secondEndangeredAnimal));
+    assertTrue(EndangeredAnimal.allEndangeredAnimals().get(1).equals(secondEndangeredAnimal));
   }
 
   @Test
@@ -41,7 +41,7 @@ public class EndangeredAnimalTest{
     firstEndangeredAnimal.save();
     EndangeredAnimal secondEndangeredAnimal = new EndangeredAnimal("Tiger",EndangeredAnimal.GOOD_HEALTH_LEVEL,EndangeredAnimal.YOUNG_ANIMAL);
     secondEndangeredAnimal.save();
-    assertEquals(2,EndangeredAnimal.all().size());
+    assertEquals(2,EndangeredAnimal.allEndangeredAnimals().size());
   }
 
   @Test
@@ -56,7 +56,7 @@ public class EndangeredAnimalTest{
     EndangeredAnimal testEndangeredAnimal = new EndangeredAnimal("Rhinoceros",EndangeredAnimal.GOOD_HEALTH_LEVEL,EndangeredAnimal.YOUNG_ANIMAL);
     testEndangeredAnimal.save();
     testEndangeredAnimal.delete();
-    assertEquals(0,EndangeredAnimal.all().size());
+    assertEquals(0,EndangeredAnimal.allEndangeredAnimals().size());
   }
 
   @Test
