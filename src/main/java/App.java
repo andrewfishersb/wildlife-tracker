@@ -120,7 +120,6 @@ public class App{
         return new ModelAndView(model, layout);
       }, new VelocityTemplateEngine());
 
-//deletes endangered sighting
       post("/endangered/:id/deleted-sighting/:sightingid", (request, response) -> {
         Map<String, Object> model = new HashMap<String, Object>();
         int animalId = Integer.parseInt(request.params("id"));
@@ -130,7 +129,6 @@ public class App{
         return new ModelAndView(model, layout);
       }, new VelocityTemplateEngine());
 
-      //deletes animal sighting
       post("/animal/:id/deleted-sighting/:sightingid", (request, response) -> {
         Map<String, Object> model = new HashMap<String, Object>();
         int animalId = Integer.parseInt(request.params("id"));
